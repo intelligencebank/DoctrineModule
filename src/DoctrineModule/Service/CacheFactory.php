@@ -26,6 +26,7 @@ use Doctrine\Common\Cache\MemcachedCache;
 use Doctrine\Common\Cache\RedisCache;
 use DoctrineModule\Service\AbstractFactory;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use IB\Cache\Redis\Doctrine as IBRedisCache;
 
 /**
  * Cache ServiceManager factory
@@ -72,6 +73,9 @@ class CacheFactory extends AbstractFactory
             /* @var $cache MemcachedCache */
             $cache->setMemcached($instance);
         } elseif ($cache instanceof RedisCache) {
+            /* @var $cache RedisCache */
+            $cache->setRedis($instance);
+        } elseif ($cache instanceof IBRedisCache) {
             /* @var $cache RedisCache */
             $cache->setRedis($instance);
         }
